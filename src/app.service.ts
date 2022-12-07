@@ -1,8 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Request } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getHello(@Request() req): { message: string; user: unknown } {
+    return {
+      message: `Protected, but user '${req.user.name}' has access!`,
+      user: req.user,
+    };
   }
 }
